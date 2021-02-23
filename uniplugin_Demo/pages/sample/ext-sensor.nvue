@@ -1,0 +1,90 @@
+<template>
+	<div>
+		<button type="primary" @click="registerSensor">registerSensor</button>
+		<button type="primary" @click="unRegisterSensor">unRegisterSensor</button>
+		<button type="primary" @click="getSensorInfo">getSensorInfo</button>
+		<button type="primary" @click="toDegree180">toDegree180</button>
+		<button type="primary" @click="toDegree360">toDegree360</button>
+		<text class="text-black">degree：{{degree}}</text>
+		<text class="text-black">x：{{x}}</text>
+		<text class="text-black">y：{{y}}</text>
+		<text class="text-black">z：{{z}}</text>
+	</div>
+</template>
+
+<script>
+	// 获取 module 
+	var testModule = uni.requireNativePlugin("Huiy-SensorModule")
+	const modal = uni.requireNativePlugin('modal');
+	export default {
+		data() {
+			return {
+				degree:0,
+				x:0,
+				y:0,
+				z:0,
+			}
+		},
+		onLoad() {
+			var globalEvent = uni.requireNativePlugin('globalEvent');
+			var that = this ;
+			globalEvent.addEventListener('myEvent', function(e){
+				console.log("globalEvent:" + that );
+				that.degree = e.degree;
+				modal.toast({
+					message: "myEvent收到："+e,
+					duration: 1.5
+				});
+			});
+			this.i = -1;
+		},
+		methods: {
+			registerSensor() {
+				// 调用异步方法
+				testModule.registerSensorAFunc(
+					(ret) => {
+						this.degree = ret.degree;
+						this.x = ret.x;
+						this.y = ret.y;
+						this.z = ret.z;
+						
+					})
+			},
+			unRegisterSensor() {
+				// 调用同步方法
+				var ret = testModule.unRegisterSensorFunc();
+				modal.toast({
+					message: "unRegister："+JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+			getSensorInfo() {
+				// 调用同步方法
+				var ret = testModule.getSensorInfoFunc();
+				modal.toast({
+					message: "getSensorInfo："+JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+			toDegree180() {
+				var ret = testModule.toDegree180Func({
+						'value': -1
+					});
+				modal.toast({
+					message: "toDegree180："+JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+			toDegree360() {
+				// 调用同步方法
+				var ret = testModule.toDegree360Func({
+						'value': -1
+					});
+				modal.toast({
+					message: "toDegree360："+ret.degree,
+					duration: 1.5
+				});
+			},
+		}
+	}
+</script>

@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Sale",
+	"id": "Huiy-Sale",
+	"version": "1.0",
+	"description": "售货机插件: 对接售货机，购买商品",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "ADP-Module",
+				"class": "io.huiy.deemo.sale.SaleModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

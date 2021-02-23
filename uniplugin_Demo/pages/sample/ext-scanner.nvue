@@ -1,0 +1,63 @@
+<template>
+	<div>
+		<button type="primary" @click="initScannerFunc">initScannerFunc</button>
+		<button type="primary" @click="connectScannerFunc">connectScannerFunc</button>
+		<button type="primary" @click="disconnectScannerFunc">disconnectScannerFunc</button>
+		<text class="text-black">名称：{{i}}</text>
+	</div>
+</template>
+
+<script>
+	// 获取 module 
+	var testModule = uni.requireNativePlugin("Huiy-ScannerModule")
+	const modal = uni.requireNativePlugin('modal');
+	export default {
+		data() {
+			return {
+				i: 1
+			}
+		},
+		onLoad() {
+			var that = this;
+			var globalEvent = uni.requireNativePlugin('globalEvent');
+			globalEvent.addEventListener('scannerEvent', function(e) {
+				console.log("myevent:" + that);
+				that.i = e.barcode;
+				modal.toast({
+					message: "globalEvent收到：" + e.scannerId + " " + e.type + " " + e.msg + " " + e.barcode + " " + e.barType,
+					duration: 1.5
+				});
+			});
+			this.i = -1;
+		},
+		methods: {
+			initScannerFunc() {
+				testModule.initScannerAFunc(
+					(ret) => {
+						modal.toast({
+							message: "init：" + JSON.stringify(ret),
+							duration: 1.5
+						});
+					});
+			},
+			connectScannerFunc() {
+				testModule.connectScannerAFunc(
+					(ret) => {
+						modal.toast({
+							message: "connect：" + JSON.stringify(ret),
+							duration: 1.5
+						});
+					});
+			},
+			disconnectScannerFunc() {
+				testModule.disconnectScannerAFunc(
+					(ret) => {
+						modal.toast({
+							message: "connect：" + JSON.stringify(ret),
+							duration: 1.5
+						});
+					});
+			},
+		}
+	}
+</script>

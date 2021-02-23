@@ -1,0 +1,136 @@
+<template>
+	<view>
+		<view class="cu-bar"></view>
+		<button class="margin-top" type="default" @click="init">初始化</button>
+		<button class="margin-top" type="default" @click="scan">扫描蓝牙设备</button>
+		<button class="margin-top" type="default" @click="getLY">获取蓝牙设备</button>
+		<button class="margin-top" type="default" @click="link">连接设备</button>
+		<button class="margin-top" type="default" @click="read">开始读卡</button>
+		<button class="margin-top" type="default" @click="stopRead">暂停读卡</button>
+		<button class="margin-top" type="default" @click="tiao">断开连接</button>
+	</view>
+</template>
+
+<script>
+	import {post,get,showModal,IsNull,IsNullOrWhiteSpace,JSONParse,formatDate,compressImage,zoomImage} from '../../common/util.js';
+	var _this;
+	const card = uni.requireNativePlugin('CVR-Module');
+
+	export default {
+		data() {
+			return {
+				isRead: false,
+				IDCard_Detail: {cvr_id_number: "0"}
+			}
+		},
+		mounted() {
+			_this = this;
+			// this.init();
+		},
+		onLoad(){
+			_this = this;
+			// this.init();
+		},
+		methods: {
+			init() {
+				console.log("初始化设备");
+				card.initCVR(result => {
+					console.log(result);
+					uni.showToast({
+						title: JSON.stringify(result),
+					    duration: 1000,
+						icon:'none'
+					});
+				});
+			},
+			scan(){
+				console.log("扫描蓝牙设备");
+				card.scanBluetoothDeviceCVR(result => {
+					console.log(result);
+					uni.showToast({
+					   title: JSON.stringify(result),
+					   duration: 1000,
+					   icon:'none'
+					});
+				});
+			},
+			getLY(){
+				console.log("获取蓝牙设备");
+				card.getBluetoothDeviceCVR(8,result => {
+					console.log(result);
+					uni.showToast({
+					   title: JSON.stringify(result),
+					   duration: 1000,
+					   icon:'none'
+					});
+				});
+			},
+			link() {
+				console.log("连接设备");
+				card.connectBluetoothCVR('DC:0D:30:3D:C7:EE',result => {
+					console.log(result);
+					uni.showToast({
+					   title: JSON.stringify(result),
+					   duration: 1000,
+					   icon:'none'
+					});
+				});
+			},
+			read() {
+				console.log("读卡");
+				card.loadAutoHandlerCVR(4,result =>{
+					console.log(result);
+					uni.showToast({
+					   title: JSON.stringify(result),
+					   duration: 1000,
+					   icon:'none'
+					});
+					// if(result.code == 1){
+					// 	if(_this.IDCard_Detail.cvr_id_number != result.cvr_id_number){
+					// 		_this.IDCard_Detail = result;
+					// 		_this.queryQrCode();
+					// 	}	
+					// }
+				})
+			},
+			stopRead(){
+				console.log("暂停读卡");
+				card.stopAutoCVR(result => {
+					console.log(result);
+					uni.showToast({
+					    title: JSON.stringify(result),
+					    duration: 1000,
+					    icon:'none'
+					});
+				});
+			},
+			tiao(){
+				console.log("断开连接");
+				card.gotoNativePage(result => {
+					console.log(result);
+					uni.showToast({
+					    title: JSON.stringify(result),
+					    duration: 1000,
+					    icon:'none'
+					});
+				});
+			},
+			async queryQrCode() {
+				try{
+					_this.dylist = await get(_this.ty_read + 'Business/QueryJKM',{
+						idNumber: parseInt(_this.IDCard_Detail.cvr_id_number),
+						mffd:"湖州市",
+					});
+					_this.read();
+					
+				}
+				catch(e){
+					showModal("错误信息",e);
+				}			
+			},
+		}
+	}
+</script>
+
+<style>
+</style>

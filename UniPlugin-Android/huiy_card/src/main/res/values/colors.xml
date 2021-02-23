@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pressed">#5B5B5B</color>
+    <color name="no_pressed">#B4CDCD</color>
+    <color name="app_item">#888888</color>
+</resources>

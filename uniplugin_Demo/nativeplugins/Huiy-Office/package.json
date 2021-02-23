@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Office",
+	"id": "Huiy-Office",
+	"version": "1.0",
+	"description": "Office文档展示控件: 支持Word、Excel、PDF、PPT等多种格式文件展示",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "component",
+				"name": "officeFrame",
+				"class": "io.huiy.deemo.office.OfficeFrame"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

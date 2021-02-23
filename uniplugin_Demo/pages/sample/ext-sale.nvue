@@ -1,0 +1,122 @@
+<template>
+	<view>
+		<view class="cu-bar"></view>
+		<button class="margin-top" type="default" @click="init">初initADP始化</button>
+		<button class="margin-top" type="default" @click="outGoods">outGoods</button>
+		<button class="margin-top" type="default" @click="submitFirst">submitFirst</button>
+		<button class="margin-top" type="default" @click="initSecond">initSecond</button>
+		<button class="margin-top" type="default" @click="initThird">initThird</button>
+		<button class="margin-top" type="default" @click="initFourth">initFourth</button>
+		<button class="margin-top" type="default" @click="destroyed">destroyed</button>
+	</view>
+</template>
+
+<script>
+	import {post,get,showModal,IsNull,IsNullOrWhiteSpace,JSONParse,formatDate,compressImage,zoomImage} from '../../common/util.js';
+	var _this;
+	const card = uni.requireNativePlugin('CVR-Module');
+	const ADP = uni.requireNativePlugin('ADP-Module');
+
+	export default {
+		data() {
+			return {
+				isRead: false,
+				IDCard_Detail: {cvr_id_number: "0"}
+			}
+		},
+		mounted() {
+			_this = this;
+			// this.init();
+		},
+		onLoad(){
+			_this = this;
+			// this.init();
+		},
+		methods: {
+			init() {
+				console.log("初始化设备");
+				ADP.initADP('ttyS', 3, 38400, result => {
+					
+					uni.showToast({
+						title: '初始化完成',
+						icon: 'none'
+					})
+				});
+			},
+			outGoods(aisle){
+				var that = this;
+				uni.showToast({
+					title: "出货中，货道号为"+(aisle+1),
+					icon:'none'
+				});
+				if(aisle>=60 && aisle <= 77){
+					ADP.outGoodsSalve(aisle,result => {});
+				}else if(aisle > 0 && aisle){
+					ADP.outGoods(aisle,result => {});
+				}
+				that.getGoodsInfoList();  // 重新拉去列表
+			},
+			 
+			submitFirst(){
+				uni.showToast({
+					title: "开始初始化...",
+					icon:'none'
+				});
+				ADP.initADP('ttyS', 3, 38400, result => {
+					
+					uni.showToast({
+						title: '初始化完成',
+						icon: 'none'
+					})
+				});
+			},
+			initSecond(){
+				uni.showToast({
+					title: "启用副柜...",
+					icon:'none'
+				});
+				// 初始化成功后 启用副柜
+				ADP.enableSalve(true, false, result => {});
+			},
+			initThird(){
+				
+					uni.showToast({
+						title: "启用升降机...",
+						icon:'none'
+					});
+					// 启用副柜后 设置升降机使用
+					ADP.enable812(true,5,result => {});
+			},
+			initFourth(){
+				
+				uni.showToast({
+					title: "初始化升降机...",
+					icon:'none'
+				});
+					// 初始化升降机
+					ADP.run(result => {});
+			},
+			destroyed(){
+				ADP.closeADP();
+			},
+			
+			
+			async queryQrCode() {
+				try{
+					_this.dylist = await get(_this.ty_read + 'Business/QueryJKM',{
+						idNumber: parseInt(_this.IDCard_Detail.cvr_id_number),
+						mffd:"湖州市",
+					});
+					_this.read();
+					
+				}
+				catch(e){
+					showModal("错误信息",e);
+				}			
+			},
+		}
+	}
+</script>
+
+<style>
+</style>

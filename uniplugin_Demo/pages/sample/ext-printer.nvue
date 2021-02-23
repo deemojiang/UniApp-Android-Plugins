@@ -1,0 +1,151 @@
+<template>
+	<div>
+		<button type="primary" @click="getUsbDevList">getUsbDevList</button>
+		<button type="primary" @click="connectUsbDev">connectUsbDev</button>
+		<button type="primary" @click="printerLabel">printerLabel</button>
+		<text class="text-black">名称：{{i}}</text>
+		<input type="primary" v-model="conDev"></input>
+		<input type="primary" v-model="printerJson"></input>
+	</div>
+</template>
+
+<script>
+	// 获取 module 
+	var testModule = uni.requireNativePlugin("Huiy-PrinterModule")
+	const modal = uni.requireNativePlugin('modal');
+	export default {
+		data() {
+			return {
+				i: 1,
+				name: "dev",
+				dataList: [],
+				conDev: '',
+				printerJson: ''
+			}
+		},
+		onLoad() {
+			var globalEvent = uni.requireNativePlugin('globalEvent');
+			var that = this;
+			globalEvent.addEventListener('printerEvent', function(e) {
+				console.log("globalEvent:" + that);
+				that.i = e.degree;
+				modal.toast({
+					message: "myEvent收到：" + e.type + " " + e.msg,
+					duration: 1.5
+				});
+			});
+			this.i = -1;
+		},
+		methods: {
+			getUsbDevList() {
+				// 调用同步方法
+				var ret = testModule.getUsbDevListFunc();
+				this.dataList = ret.list;
+				this.conDev = this.dataList[0]
+				modal.toast({
+					message: "devList：" + JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+			connectUsbDev() {
+				// 调用同步方法
+				var ret = testModule.connectUsbDevFunc({
+					'name': this.conDev
+				});
+				modal.toast({
+					message: "connectUsbDev：" + JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+			printerLabel() {
+				// 调用同步方法
+				var ret = testModule.printerLabelFunc({
+					"direction": 0,
+					"gap": 20,
+					"height": 30,
+					"mirror": 0,
+					"width": 40,
+					"x": 0,
+					"y": 0,
+					"printInfoList": [{
+						"cellWidth": 5,
+						"font": "TSS24.BF2",
+						"height": 100,
+						"readable": 0,
+						"rotation": 0,
+						"scaleX": 2,
+						"scaleY": 2,
+						"text": "悠悠奶茶",
+						"type": 1,
+						"x": 60,
+						"y": 10
+					}, {
+						"cellWidth": 5,
+						"font": "TSS24.BF2",
+						"height": 100,
+						"readable": 0,
+						"rotation": 0,
+						"scaleX": 1,
+						"scaleY": 1,
+						"text": "品名：招牌奶茶",
+						"type": 1,
+						"x": 20,
+						"y": 70
+					}, {
+						"cellWidth": 5,
+						"font": "TSS24.BF2",
+						"height": 100,
+						"readable": 0,
+						"rotation": 0,
+						"scaleX": 1,
+						"scaleY": 1,
+						"text": "规格：大杯",
+						"type": 1,
+						"x": 20,
+						"y": 100
+					}, {
+						"cellWidth": 5,
+						"font": "TSS24.BF2",
+						"height": 100,
+						"readable": 0,
+						"rotation": 0,
+						"scaleX": 1,
+						"scaleY": 1,
+						"text": "价格：16元",
+						"type": 1,
+						"x": 20,
+						"y": 130
+					}, {
+						"cellWidth": 3,
+						"height": 100,
+						"level": "L",
+						"readable": 0,
+						"rotation": 0,
+						"scaleX": 0,
+						"scaleY": 0,
+						"text": "barcode1234567",
+						"type": 2,
+						"x": 200,
+						"y": 75
+					}, {
+						"barType": "128",
+						"cellWidth": 5,
+						"height": 50,
+						"readable": 1,
+						"rotation": 0,
+						"scaleX": 0,
+						"scaleY": 0,
+						"text": "7654321",
+						"type": 3,
+						"x": 30,
+						"y": 160
+					}]
+				});
+				modal.toast({
+					message: "printerLabel：" + JSON.stringify(ret),
+					duration: 1.5
+				});
+			},
+		}
+	}
+</script>

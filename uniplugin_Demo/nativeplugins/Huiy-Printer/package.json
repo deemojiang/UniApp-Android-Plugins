@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Printer",
+	"id": "Huiy-Printer",
+	"version": "1.0",
+	"description": "标签打印机插件: 控制标签打印机打印标签",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "Huiy-PrinterModule",
+				"class": "io.huiy.deemo.printer.PrinterModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

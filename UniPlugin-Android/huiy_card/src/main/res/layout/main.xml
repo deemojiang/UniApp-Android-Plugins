@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/back"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btconn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.13"
+            android:background="@drawable/selector"
+            android:text="连    接"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btread"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.13"
+            android:background="@drawable/selector"
+            android:textSize="20dp"
+            android:text="读    卡" />
+        <Button
+            android:id="@+id/btclose"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.13"
+            android:background="@drawable/selector"
+            android:textSize="20dp"
+            android:text="断    开" />
+    </LinearLayout>
+
+
+<LinearLayout
+    android:id="@+id/linearLayout4"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <Button
+        android:id="@+id/btsleep"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.23"
+        android:background="@drawable/selector"
+        android:text="休      眠"
+        android:textSize="20dp" />
+
+
+
+    <Button
+        android:id="@+id/btweak"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.21"
+        android:background="@drawable/selector"
+        android:text="唤      醒"
+        android:textSize="20dp" />
+
+</LinearLayout>
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/sam"
+    />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.00" >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/face" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.87"
+            android:text="信息显示"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</LinearLayout>

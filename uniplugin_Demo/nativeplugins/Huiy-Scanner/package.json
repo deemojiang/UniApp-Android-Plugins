@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Scanner",
+	"id": "Huiy-Scanner",
+	"version": "1.0",
+	"description": "扫码枪插件: 用扫码枪识别各种商品码",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "Huiy-ScannerModule",
+				"class": "io.huiy.deemo.scanner.ScannerModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

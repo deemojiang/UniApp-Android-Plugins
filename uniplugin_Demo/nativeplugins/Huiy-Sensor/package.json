@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Sensor",
+	"id": "Huiy-Sensor",
+	"version": "1.0",
+	"description": "android陀螺仪插件: 获取android陀螺仪参数",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "Huiy-SensorModule",
+				"class": "io.huiy.deemo.sensor.SensorModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

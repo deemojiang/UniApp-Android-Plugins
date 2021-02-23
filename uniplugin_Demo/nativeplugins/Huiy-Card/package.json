@@ -1,0 +1,17 @@
+{
+	"name": "Huiy-Card",
+	"id": "Huiy-Card",
+	"version": "1.0",
+	"description": "身份证识别插件: 可以读取身份证信息",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "CVR-Module",
+				"class": "io.huiy.deemo.card.CardModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}

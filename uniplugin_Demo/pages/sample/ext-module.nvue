@@ -1,0 +1,52 @@
+<template>
+	<div>
+		<button type="primary" @click="testAsyncFunc">testAsyncFunc</button>
+		<button type="primary" @click="testSyncFunc">testSyncFunc</button>
+		<button type="primary" @click="gotoNativePage">跳转原生Activity</button>
+	</div>
+</template>
+
+<script>
+	// 获取 module 
+	var testModule = uni.requireNativePlugin("DCloud-TestModule")
+	const modal = uni.requireNativePlugin('modal');
+	export default {
+		onLoad() {
+			plus.globalEvent.addEventListener('TestEvent', function(e){
+				modal.toast({
+					message: "TestEvent收到："+e.msg,
+					duration: 1.5
+				});
+			});
+		},
+		methods: {
+			testAsyncFunc() {
+				// 调用异步方法
+				testModule.testAsyncFunc({
+						'name': 'unimp',
+						'age': 1
+					},
+					(ret) => {
+						modal.toast({
+							message: ret,
+							duration: 1.5
+						});
+					})
+			},
+			testSyncFunc() {
+				// 调用同步方法
+				var ret = testModule.testSyncFunc({
+					'name': 'unimp',
+					'age': 1
+				})
+				modal.toast({
+					message: ret,
+					duration: 1.5
+				});
+			},
+			gotoNativePage() {
+				testModule.gotoNativePage();
+			}
+		}
+	}
+</script>

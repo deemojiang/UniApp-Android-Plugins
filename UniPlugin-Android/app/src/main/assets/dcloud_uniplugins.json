@@ -1,0 +1,77 @@
+{
+  "nativePlugins": [
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "TestModule",
+          "class": "io.dcloud.uniplugin.TestModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "component",
+          "name": "DCloud-TestText",
+          "class": "io.dcloud.uniplugin.TestText"
+        }
+      ]
+    },
+    {
+      "hooksClass": "",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "DCloud-RichAlert",
+          "class": "uni.dcloud.io.uniplugin_richalert.RichAlertModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "Huiy-SensorModule",
+          "class": "io.huiy.deemo.sensor.SensorModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "Huiy-ScannerModule",
+          "class": "io.huiy.deemo.scanner.ScannerModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "Huiy-PrinterModule",
+          "class": "io.huiy.deemo.printer.PrinterModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "Huiy-CardModule",
+          "class": "io.huiy.deemo.card.CardModule"
+        }
+      ]
+    },
+    {
+      "plugins": [
+        {
+          "type": "module",
+          "name": "Huiy-SaleModule",
+          "class": "io.huiy.deemo.card.SaleModule"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+<template>
+	<div>
+		<text class="text-black">内核加载状态：{{name}}</text>
+		<officeFrame ref="officeView" officeUrl="/storage/emulated/0/excel001.xlsx" style="width:1260;height:700" @onInit="onInit" @click="officeClick"></officeFrame>
+	</div>
+</template>
+
+<script>  
+    export default {  
+        data() {  
+            return {  
+				name: "onInit",
+            }  
+        },  
+        onLoad() {  
+        },  
+        methods: {  
+			onInit(e) {
+				this.name = "onInit --> "+e.detail.type + " "+ e.detail.msg+ " "+ e.detail.progress+ " "+ e.detail.isSuccess;		
+			},
+			officeClick(e) {
+				this.name = "loadFile"
+				this.$refs.officeView.loadFile("/sdcard/ppt001.pptx");
+			}
+        }  
+    }  
+</script>  

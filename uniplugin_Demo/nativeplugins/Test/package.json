@@ -1,0 +1,25 @@
+{
+	"name": "Test",
+	"id": "Test",
+	"version": "1.0",
+	"description": "示例插件",
+	"_dp_type": "nativeplugin",
+	"_dp_nativeplugin": {
+		"android": {
+			"plugins": [{
+				"type": "module",
+				"name": "DCloud-TestModule",
+				"class": "io.dcloud.uniplugin.TestModule"
+			},{
+				"type": "component",
+				"name": "myText",
+				"class": "io.dcloud.uniplugin.TestText"
+			},{
+				"type": "module",
+				"name": "DCloud-RichAlert",
+				"class": "uni.dcloud.io.uniplugin_richalert.RichAlertModule"
+			}],
+			"integrateType": "aar"
+		}
+	}
+}
